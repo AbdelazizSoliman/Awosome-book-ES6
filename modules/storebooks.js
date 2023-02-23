@@ -1,23 +1,23 @@
 export default class storebooks {
-  static getBooks() {
+  static getBooks = () => {
     let books;
-    if (localStorage.getItem('books') === null) {
+    if (localStorage.getItem("books") === null) {
       books = [];
     } else {
-      books = JSON.parse(localStorage.getItem('books'));
+      books = JSON.parse(localStorage.getItem("books"));
     }
     return books;
-  }
+  };
 
-  static addBook(book) {
+  static addBook = (book) => {
     const books = storebooks.getBooks();
 
     books.push(book);
 
-    localStorage.setItem('books', JSON.stringify(books));
-  }
+    localStorage.setItem("books", JSON.stringify(books));
+  };
 
-  static removeBook(author) {
+  static removeBook = (author) => {
     const books = storebooks.getBooks();
     books.forEach((book, index) => {
       if (book.author === author) {
@@ -25,6 +25,6 @@ export default class storebooks {
       }
     });
 
-    localStorage.setItem('books', JSON.stringify(books));
-  }
+    localStorage.setItem("books", JSON.stringify(books));
+  };
 }

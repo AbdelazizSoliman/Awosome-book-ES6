@@ -1,22 +1,22 @@
-import menu from './modules/menu.js';
+import menu from "./modules/menu.js";
 // eslint-disable-next-line import/no-unresolved
-import Book from './modules/BookStorage.js';
-import { DateTime } from './modules/luxon.js';
-import storebooks from './modules/storebooks.js';
+import Book from "./modules/BookStorage.js";
+import { DateTime } from "./modules/luxon.js";
+import storebooks from "./modules/storebooks.js";
 
 menu();
 class UI {
-  static displayBooks() {
+  static displayBooks = () => {
     const books = storebooks.getBooks();
 
     books.forEach((book) => UI.addBookToList(book));
-  }
+  };
 
   static addBookToList(book) {
-    const list = document.querySelector('#data');
+    const list = document.querySelector("#data");
 
-    const div = document.createElement('div');
-    div.className = 'data-cont';
+    const div = document.createElement("div");
+    div.className = "data-cont";
 
     div.innerHTML = `
           <p>"${book.title}"</p>
@@ -28,25 +28,25 @@ class UI {
     list.appendChild(div);
   }
 
-  static deleteBook(el) {
-    if (el.classList.contains('delete')) {
+  static deleteBook = (el) => {
+    if (el.classList.contains("delete")) {
       el.parentElement.parentElement.remove();
     }
-  }
+  };
 
-  static clearField() {
-    document.querySelector('#title').value = '';
-    document.querySelector('#author').value = '';
-  }
+  static clearField = () => {
+    document.querySelector("#title").value = "";
+    document.querySelector("#author").value = "";
+  };
 }
 
-document.addEventListener('DOMContentLoaded', UI.displayBooks);
+document.addEventListener("DOMContentLoaded", UI.displayBooks);
 
 // form submission to the add button
-document.querySelector('#form').addEventListener('submit', (e) => {
+document.querySelector("#form").addEventListener("submit", (e) => {
   e.preventDefault();
-  const title = document.querySelector('#title').value;
-  const author = document.querySelector('#author').value;
+  const title = document.querySelector("#title").value;
+  const author = document.querySelector("#author").value;
 
   const book = new Book(title, author);
 
@@ -61,16 +61,16 @@ document.querySelector('#form').addEventListener('submit', (e) => {
 });
 
 // Removing book data
-const data = document.querySelector('#data');
-data.addEventListener('click', (e) => {
+const data = document.querySelector("#data");
+data.addEventListener("click", (e) => {
   // Remove book from interface
   UI.deleteBook(e.target);
   // Remove book from local storage
   storebooks.removeBook(
-    e.target.parentElement.previousElementSibling.textContent,
+    e.target.parentElement.previousElementSibling.textContent
   );
 });
 
 // Luxon Date and time
 const currentDate = DateTime.now().toLocaleString(DateTime.DATETIME_MED);
-document.getElementById('timeText').innerHTML = currentDate;
+document.getElementById("timeText").innerHTML = currentDate;
