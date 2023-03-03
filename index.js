@@ -1,9 +1,9 @@
-import menu from './modules/menu.js';
+import setupNavigation from './modules/setupNavigation.js';
 import Book from './modules/bookStorage.js';
 import { DateTime } from './modules/luxon.js';
 import storebooks from './modules/storebooks.js';
 
-menu();
+setupNavigation();
 
 class UI {
   static displayBooks = () => {

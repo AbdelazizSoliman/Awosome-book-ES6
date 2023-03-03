@@ -1,30 +1,25 @@
-export default class storebooks {
-  static getBooks = () => {
-    let books;
-    if (localStorage.getItem('books') === null) {
-      books = [];
-    } else {
-      books = JSON.parse(localStorage.getItem('books'));
-    }
-    return books;
-  };
+class StoreBooks {
+  static getBooks() {
+    const storedBooks = localStorage.getItem('books');
+    return storedBooks ? JSON.parse(storedBooks) : [];
+  }
 
-  static addBook = (book) => {
-    const books = storebooks.getBooks();
+  static setBooks(books) {
+    localStorage.setItem('books', JSON.stringify(books));
+  }
 
+  static addBook(book) {
+    const books = StoreBooks.getBooks();
     books.push(book);
+    StoreBooks.setBooks(books);
+  }
 
-    localStorage.setItem('books', JSON.stringify(books));
-  };
-
-  static removeBook = (author) => {
-    const books = storebooks.getBooks();
-    books.forEach((book, index) => {
-      if (book.author === author) {
-        books.splice(index, 1);
-      }
-    });
-
-    localStorage.setItem('books', JSON.stringify(books));
-  };
+  static removeBook(author) {
+    const books = StoreBooks.getBooks().filter(
+      (book) => book.author !== author,
+    );
+    StoreBooks.setBooks(books);
+  }
 }
+
+export default StoreBooks;
