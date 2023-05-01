@@ -11,13 +11,12 @@ class Book {
 
 // UI Class: Handle UI Tasks
 class UI {
-  static displayBooks() {
+  static displayBooks = () => {
     const books = store.getBooks();
-
     books.forEach((book) => UI.addBookToList(book));
-  }
+  };
 
-  static addBookToList(book) {
+  static addBookToList = (book) => {
     const list = document.querySelector("#data");
 
     const div = document.createElement("div");
@@ -31,23 +30,23 @@ class UI {
      `;
 
     list.appendChild(div);
-  }
+  };
 
-  static deleteBook(el) {
+  static deleteBook = (el) => {
     if (el.classList.contains("delete")) {
       el.parentElement.parentElement.remove();
     }
-  }
+  };
 
-  static clearField() {
+  static clearField = () => {
     document.querySelector("#title").value = "";
     document.querySelector("#author").value = "";
-  }
+  };
 }
 
 // store data in local storage
 class store {
-  static getBooks() {
+  static getBooks = () => {
     let books;
     if (localStorage.getItem("books") === null) {
       books = [];
@@ -55,17 +54,15 @@ class store {
       books = JSON.parse(localStorage.getItem("books"));
     }
     return books;
-  }
+  };
 
-  static addBook(book) {
+  static addBook = (book) => {
     const books = store.getBooks();
-
     books.push(book);
-
     localStorage.setItem("books", JSON.stringify(books));
-  }
+  };
 
-  static removeBook(authore) {
+  static removeBook = (authore) => {
     const books = store.getBooks();
     books.forEach((book, index) => {
       if (book.authore === authore) {
@@ -74,7 +71,7 @@ class store {
     });
 
     localStorage.setItem("books", JSON.stringify(books));
-  }
+  };
 }
 
 //  Event for display books
@@ -119,36 +116,36 @@ document.getElementById("cont").addEventListener("click", () => {
   showContact();
 });
 
-function defaultDisplay() {
+const defaultDisplay = () => {
   document.getElementById("diplay-list").setAttribute("class", "non-show");
   document.getElementById("input-data").setAttribute("class", "show");
   document.getElementById("contact").setAttribute("class", "non-show");
   document.getElementById("footer").setAttribute("class", "show");
-}
+};
 defaultDisplay();
 
-function showList() {
+const showList = () => {
   document.getElementById("diplay-list").setAttribute("class", "show");
   document.getElementById("input-data").setAttribute("class", "non-show");
   document.getElementById("contact").setAttribute("class", "non-show");
-}
+};
 
-function showAdd() {
+const showAdd = () => {
   document.getElementById("diplay-list").setAttribute("class", "non-show");
   document.getElementById("input-data").setAttribute("class", "show");
   document.getElementById("contact").setAttribute("class", "non-show");
-}
+};
 
-function showContact() {
+const showContact = () => {
   document.getElementById("diplay-list").setAttribute("class", "non-show");
   document.getElementById("input-data").setAttribute("class", "non-show");
   document.getElementById("contact").setAttribute("class", "show");
-}
+};
 
 document.write(new Date().getFullYear());
 
-function ondate() {
+const ondate = () => {
   document.querySelector(".date").innerHTML = Date();
-}
+};
 
 ondate();
