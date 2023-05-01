@@ -24,11 +24,13 @@ class UI {
     list.appendChild(div);
   };
 
-  static deleteBook(el) {
-    if (el.classList.contains('delete')) {
-      el.parentElement.parentElement.remove();
+  static deleteBook = (e) => {
+    if (e.target.classList.contains('delete')) {
+      const author = e.target.parentElement.previousElementSibling.textContent.trim();
+      e.target.parentElement.parentElement.remove();
+      StoreBooks.removeBook(author);
     }
-  }
+  };
 
   static clearField = () => {
     document.querySelector('#title').value = '';
