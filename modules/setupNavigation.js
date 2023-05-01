@@ -1,11 +1,13 @@
 const showElement = (id) => {
-  document.getElementById(id).classList.add('show');
-  document.getElementById(id).classList.remove('non-show');
+  const element = document.querySelector(`#${id}`);
+  element.classList.add('show');
+  element.classList.remove('non-show');
 };
 
 const hideElement = (id) => {
-  document.getElementById(id).classList.add('non-show');
-  document.getElementById(id).classList.remove('show');
+  const element = document.querySelector(`#${id}`);
+  element.classList.add('non-show');
+  element.classList.remove('show');
 };
 
 const showList = () => {
@@ -29,9 +31,13 @@ const showContact = () => {
 const setupNavigation = () => {
   showList();
 
-  document.getElementById('list').addEventListener('click', showList);
-  document.getElementById('add').addEventListener('click', showAdd);
-  document.getElementById('cont').addEventListener('click', showContact);
+  document.querySelector('#list').addEventListener('click', showList);
+  document.querySelector('#add').addEventListener('click', showAdd);
+  document.querySelector('#cont').addEventListener('click', showContact);
 };
+
+document
+  .querySelector('#list')
+  .addEventListener('click', showList, { once: true });
 
 export default setupNavigation;

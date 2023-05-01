@@ -1,13 +1,13 @@
 import setupNavigation from './modules/setupNavigation.js';
 import Book from './modules/bookStorage.js';
 import { DateTime } from './modules/luxon.js';
-import storebooks from './modules/storebooks.js';
+import StoreBooks from './modules/storebooks.js';
 
 setupNavigation();
 
 class UI {
   static displayBooks = () => {
-    const books = storebooks.getBooks();
+    const books = StoreBooks.getBooks();
     books.forEach((book) => UI.addBookToList(book));
   };
 
@@ -24,11 +24,11 @@ class UI {
     list.appendChild(div);
   };
 
-  static deleteBook = (el) => {
+  static deleteBook(el) {
     if (el.classList.contains('delete')) {
       el.parentElement.parentElement.remove();
     }
-  };
+  }
 
   static clearField = () => {
     document.querySelector('#title').value = '';
@@ -44,17 +44,11 @@ document.querySelector('#form').addEventListener('submit', (e) => {
   const author = document.querySelector('#author').value;
   const book = new Book(title, author);
   UI.addBookToList(book);
-  storebooks.addBook(book);
+  StoreBooks.addBook(book);
   UI.clearField();
 });
 
-const data = document.querySelector('#data');
-data.addEventListener('click', (e) => {
-  UI.deleteBook(e.target);
-  storebooks.removeBook(
-    e.target.parentElement.previousElementSibling.textContent,
-  );
-});
+document.querySelector('#data').addEventListener('click', UI.deleteBook);
 
 const currentDate = DateTime.now().toLocaleString(DateTime.DATETIME_MED);
-document.getElementById('timeText').innerHTML = currentDate;
+document.querySelector('#timeText').textContent = currentDate;
