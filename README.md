@@ -77,7 +77,6 @@ In order to run this project you need:
 -Git bash
 -Node JS
 -Visual Studio Code as your code editor
--Figma account
 </ul>
 
 ### Setup
@@ -86,7 +85,7 @@ Clone this repository to your desired folder:
 
 ```sh
   cd my-folder
-  git clone[ (https://github.com/kazaneza/awesome-book.git)]
+  git clone[ (https://github.com/k..)]
 ```
 
 ### Install
