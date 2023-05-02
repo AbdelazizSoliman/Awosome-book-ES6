@@ -85,7 +85,7 @@ Clone this repository to your desired folder:
 
 ```sh
   cd my-folder
-  git clone[ (https://github.com/k..)]
+  git clone[ (https://github.com/AbdelazizSoliman/Awosome-book-ES6.git)]
 ```
 
 ### Install
