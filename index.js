@@ -6,39 +6,42 @@ import StoreBooks from './modules/storebooks.js';
 setupNavigation();
 
 class UI {
-  static displayBooks = () => {
+  static displayBooks() {
     const books = StoreBooks.getBooks();
-    books.forEach((book) => UI.addBookToList(book));
-  };
+    books.forEach((book) => {
+      UI.addBookToList(book);
+    });
+  }
 
-  static addBookToList = (book) => {
+  static addBookToList(book) {
     const list = document.querySelector('#data');
     const div = document.createElement('div');
     div.classList.add('data-cont');
-    div.innerHTML = `
-      <p>"${book.title}"</p>
-      <p>by</p>
-      <p>${book.author}</p>
-      <div><button id="remove-btn" class='delete'>Remove</button></div>
-    `;
+    div.innerHTML = `<p>"${
+      book.title
+    }"</p><p>by</p><p>${
+      book.author
+    }</p><div><button id="remove-btn" class="delete">Remove</button></div>`;
     list.appendChild(div);
-  };
+  }
 
-  static deleteBook = (e) => {
+  static deleteBook(e) {
     if (e.target.classList.contains('delete')) {
       const author = e.target.parentElement.previousElementSibling.textContent.trim();
       e.target.parentElement.parentElement.remove();
       StoreBooks.removeBook(author);
     }
-  };
+  }
 
-  static clearField = () => {
+  static clearField() {
     document.querySelector('#title').value = '';
     document.querySelector('#author').value = '';
-  };
+  }
 }
 
-document.addEventListener('DOMContentLoaded', UI.displayBooks);
+document.addEventListener('DOMContentLoaded', () => {
+  UI.displayBooks();
+});
 
 document.querySelector('#form').addEventListener('submit', (e) => {
   e.preventDefault();
@@ -50,7 +53,9 @@ document.querySelector('#form').addEventListener('submit', (e) => {
   UI.clearField();
 });
 
-document.querySelector('#data').addEventListener('click', UI.deleteBook);
+document.querySelector('#data').addEventListener('click', (e) => {
+  UI.deleteBook(e);
+});
 
 const currentDate = DateTime.now().toLocaleString(DateTime.DATETIME_MED);
 document.querySelector('#timeText').textContent = currentDate;
